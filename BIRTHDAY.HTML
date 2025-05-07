@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Mama</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+    }
+
+    .letterbox {
+      width: 180px;
+      height: 120px;
+      background: #6c3483;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .letterbox::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: #8e44ad;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .letterbox span {
+      color: #fff;
+      font-size: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .card {
+      width: 320px;
+      height: 220px;
+      background: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateY(0) rotateX(90deg);
+      transform-origin: bottom center;
+      opacity: 0;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 1s ease, opacity 0.8s ease;
+      overflow-y: auto;
+    }
+
+    .card.show {
+      transform: translate(-50%, -250px) rotateX(0deg);
+      opacity: 1;
+    }
+
+    .card h2 {
+      color: #e84393;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .heart {
+      font-size: 26px;
+      color: #ff4d6d;
+      margin-top: 15px;
+      animation: pulse 1s infinite;
+      position: absolute;
+      animation-name: floatHeart;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes floatHeart {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 100%; opacity: 0; }
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        width: 90%;
+        height: auto;
+      }
+    }
+
+    .music-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="heartsContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+
+  <div class="container">
+    <div class="letterbox" onclick="showCard()">
+      <span>📩 Tap to Open</span>
+    </div>
+    <div class="card" id="card">
+      <h2>Happy Birthday Mama 🎉</h2>
+      <h1 style="color: rgb(9, 94, 65);">To My Beautiful Mother</h1>
+      <p style="color: #ff6b81;">ماں، آپ میری زندگی کا سب سے قیمتی تحفہ ہیں۔ آپ کی دعائیں، محبت اور قربانیاں میری کامیابی کا راز ہیں</p>
+      <p style="color: rgb(5, 81, 87);">اللہ آپ کو صحت، خوشیاں اور لمبی زندگی عطا فرمائے۔ آپ میری دنیا کی سب سے پیاری ماں ہیں۔ سالگرہ بہت بہت مبارک ہو!</p>
+      <p style="color: darkblue;">دعا ہے کہ آپ کا ہر دن خوشیوں سے بھرپور ہو،
+          اللہ آپ کو ہمیشہ سلامت رکھے، آمین۔</p>
+      <p>ماں تیرے دم سے ہے ہر لمحہ روشن</p>
+      <p>تو ہے دعا، تو ہے رحمتوں کا گلشن</p>
+      <p>تیری سالگرہ پر مانگی ہے یہ دعا</p>
+      <p>خدا تجھے رکھے ہمیشہ خوش و خرم!</p>
+      <p style="color: blueviolet;">آخر میں بس یہی کہنا چاہوں گا کہ
+          ماں، آپ میری زندگی کی وہ روشنی ہیں
+          جس کے بغیر ہر راستہ اندھیرا ہے۔
+          آپ کا سایہ، آپ کی دعا، اور آپ کی مسکراہٹ
+          میرے لیے سب کچھ ہے۔</p>
+      <div class="signature">With all my love</div>
+      <div class="heart">💖</div>
+    </div>
+  </div>
+
+  <!-- Music Controls -->
+  <div class="music-controls" id="musicControl">
+    <i class="fas fa-music"></i>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="bgMusic" loop>
+    <source src="Meri Pyari Maa.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const musicControl = document.getElementById('musicControl');
+    const bgMusic = document.getElementById('bgMusic');
+    let isMusicPlaying = false;
+
+    function showCard() {
+      document.getElementById("card").classList.add("show");
+
+      // Start music
+      bgMusic.play();
+      musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+      isMusicPlaying = true;
+    }
+
+    musicControl.addEventListener('click', function () {
+      if (isMusicPlaying) {
+        bgMusic.pause();
+        musicControl.innerHTML = '<i class="fas fa-music"></i>';
+      } else {
+        bgMusic.play();
+        musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+      isMusicPlaying = !isMusicPlaying;
+    });
+
+    function createHearts() {
+      const heartsContainer = document.getElementById('heartsContainer');
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        heart.style.bottom = '0';
+        heart.style.position = 'absolute';
+        heart.style.animation = `floatHeart ${Math.random() * 3 + 3}s linear forwards`;
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
+
+    createHearts(); // Start heart animation
+  </script>
+</body>
+</html>
